@@ -769,9 +769,10 @@ Spatial Bookmarks
 -----------------
 
 Spatial Bookmarks allow you to "bookmark" a geographic location and return to
-it later. By default, bookmarks are saved on the computer, meaning that they are available
-from any project in the same computer. If you wish to store the bookmark in the project
-file (:file:`.qgs`) then you can do this by selecting the :guilabel:`In Project` checkbox.
+it later. By default, bookmarks are saved on the computer (as :guilabel:`User
+Bookmarks`), meaning that they are available from any project of the same
+user profile. They can also be saved for a single project (named
+:guilabel:`Project Bookmarks`) and stored within the project file.
 
 Creating a Bookmark
 ...................
@@ -779,12 +780,25 @@ Creating a Bookmark
 To create a bookmark:
 
 #. Zoom or pan to the area of interest.
-#. Select the menu option :menuselection:`View --> New Bookmark` or press
-   :kbd:`Ctrl+B`. The :guilabel:`Spatial Bookmarks` panel opens with the newly
-   created bookmark.
-#. Enter a descriptive name for the bookmark (up to 255 characters).
-#. Check the :guilabel:`In Project` box if you wish to save the bookmark in the project file.
-#. Press :kbd:`Enter` to add the bookmark or click elsewhere.
+#. Select the menu option :menuselection:`View --> New Spatial Bookmark...` or
+   press :kbd:`Ctrl+B`. The :guilabel:`Bookmark Editor` dialog opens.
+
+   .. _figure_create_bookmarks:
+
+   .. figure:: img/bookmark_editor.png
+      :align: center
+
+      The Bookmark Editor Dialog
+
+#. Enter a descriptive name for the bookmark
+#. Enter or select a group name in which to store related bookmarks
+#. Select the extent of the area you wish to save, using the extent selector;
+   the extent can be calculated from a loaded layer extent, the current map
+   canvas or drawn over the current map canvas.
+#. Indicate the :guilabel:`CRS` to use for the extent
+#. Select whether the bookmark will be :guilabel:`Saved in` :guilabel:`User
+   Bookmarks` or :guilabel:`Project Bookmarks`
+#. Press :guilabel:`Save` to add the bookmark to the list
 
 Note that you can have multiple bookmarks with the same name.
 
@@ -1970,6 +1984,47 @@ map legend text, ...). Clicking the drop-down arrow shows the following options:
   shadow, ...) as described in section :ref:`text_format`.
 * :guilabel:`Copy Format` of the text
 * and :guilabel:`Paste Format` to the text, speeding configuration.
+
+
+.. index:: Unit selection; Map scale
+.. _unit_selector:
+
+Unit Selector
+--------------
+
+Size properties of the items (labels, symbols, layout elements, ...) in QGIS are not
+necessarily bound to either the project units or the units of a particular layer.
+For a large set of properties, the :guilabel:`Unit` selector drop-down menu
+allows you to tweak their values according to the rendering you want (based on
+screen resolution, paper size, or the terrain). Available units are:
+
+* :guilabel:`Millimeters`
+* :guilabel:`Points`
+* :guilabel:`Pixels`
+* :guilabel:`Meters at Scale`: This allows you to always set the size in meters,
+  regardless of what the underlying map units are (e.g. they can be in inches, feet,
+  geographic degrees, ...). The size in meters is calculated based on the current project
+  ellipsoid setting and a projection of the distances in meters at the center of the
+  current map extent.
+* :guilabel:`Map Units`: The size is scaled according to the map view scale.
+  Because this can lead to too big or too small values, use the |options| button
+  next to the entry to constrain the size to a range of values based on:
+  
+  * The :guilabel:`Minimum scale` and the :guilabel:`Maximum scale`: The value
+    is scaled based on the map view scale until you reach any of these scale limits.
+    Out of the range of scale, the value at the nearest scale limit is kept. 
+  * and/or The :guilabel:`Minimum size` and the :guilabel:`Maximum size` in ``mm``:
+    The value is scaled based on the map view scale until it reaches any of these
+    limits; Then the limit size is kept.
+
+  .. _figure_adjust_scaling_units:
+
+  .. figure:: img/adjust_scaling.png
+     :align: center
+
+     Adjust scaling range dialog  
+
+* and :guilabel:`Inches`
 
 
 .. index::
